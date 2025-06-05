@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import PhotoSwipe from 'photoswipe';
+import 'photoswipe/style.css';
+
 interface ImageData {
   src: string;
   alt: string;
@@ -12,24 +17,45 @@ interface ImageGalleryProps {
 export default function ImageGallery({
   images,
 }: ImageGalleryProps) {
+  useEffect(() => {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '.gallery-grid',
+      children: '.gallery-item',
+      pswpModule: PhotoSwipe,
+      showHideAnimationType: 'fade',
+      showAnimationDuration: 300,
+      hideAnimationDuration: 300,
+    });
+
+    lightbox.init();
+
+    return () => {
+      lightbox.destroy();
+    };
+  }, [images]);
+
   return (
     <div className="gallery-grid">
       {images.map((image, idx) => (
-        <div key={idx} className="gallery-item">
+        <a
+          key={idx}
+          href={image.src}
+          className="gallery-item"
+          data-pswp-width={image.width}
+          data-pswp-height={image.height}
+          target="_blank"
+          rel="noreferrer"
+        >
           <img
             src={image.src}
             alt={image.alt}
             width={image.width}
             height={image.height}
             className="gallery-image"
-            style={{
-              width: '100%',
-              height: 'auto',
-              borderRadius: '8px',
-            }}
+            loading="lazy"
           />
           <div className="gallery-caption">{image.alt}</div>
-        </div>
+        </a>
       ))}
     </div>
   );

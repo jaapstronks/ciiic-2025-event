@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
+import { MDXProvider } from '@mdx-js/react';
+import Video from '../components/Video';
 
 type Frontmatter = {
   title?: string;
@@ -8,16 +9,28 @@ type Frontmatter = {
   [key: string]: unknown;
 };
 
-const mdxFiles = import.meta.glob('../content/*.mdx', {
-  query: '?raw',
-  import: 'default',
-});
+type MDXModule = {
+  default: React.ComponentType;
+  frontmatter?: Frontmatter;
+};
 
-console.log('mdxFiles keys:', Object.keys(mdxFiles));
+const mdxFiles = import.meta.glob<MDXModule>(
+  '../content/*.mdx',
+  {
+    eager: true,
+  }
+);
+
+const components = {
+  Video,
+};
+
+console.log('Available MDX files:', Object.keys(mdxFiles));
 
 export default function SessionPage() {
   const { id } = useParams<{ id: string }>();
-  const [content, setContent] = useState<string>('');
+  const [MDXContent, setMDXContent] =
+    useState<React.ComponentType | null>(null);
   const [frontmatter, setFrontmatter] =
     useState<Frontmatter | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,58 +40,21 @@ export default function SessionPage() {
       setLoading(true);
       const filePath = `../content/${id}.mdx`;
       console.log('Loading file:', filePath);
+      console.log(
+        'Available files:',
+        Object.keys(mdxFiles)
+      );
+      console.log('File exists:', !!mdxFiles[filePath]);
 
       if (mdxFiles[filePath]) {
-        try {
-          // Get the raw content
-          const rawContent = (await mdxFiles[
-            filePath
-          ]()) as string;
-
-          // Extract frontmatter
-          const frontmatterMatch = rawContent.match(
-            /^---\n([\s\S]*?)\n---/
-          );
-
-          if (frontmatterMatch) {
-            const frontmatterContent = frontmatterMatch[1];
-            const titleMatch = frontmatterContent.match(
-              /title:\s*['"](.*?)['"]/
-            );
-            const imageMatch = frontmatterContent.match(
-              /featuredImage:\s*['"](.*?)['"]/
-            );
-
-            const extractedFrontmatter: Frontmatter = {
-              title: titleMatch ? titleMatch[1] : undefined,
-              featuredImage: imageMatch
-                ? imageMatch[1]
-                : undefined,
-            };
-
-            console.log(
-              'Extracted frontmatter:',
-              extractedFrontmatter
-            );
-            setFrontmatter(extractedFrontmatter);
-
-            // Remove frontmatter from content
-            const contentWithoutFrontmatter =
-              rawContent.replace(
-                /^---\n[\s\S]*?\n---\n/,
-                ''
-              );
-            setContent(contentWithoutFrontmatter);
-          }
-        } catch (error) {
-          console.error('Error loading session:', error);
-          setContent('');
-          setFrontmatter(null);
-        }
+        const module = mdxFiles[filePath];
+        console.log('Module:', module);
+        setFrontmatter(module.frontmatter ?? null);
+        setMDXContent(() => module.default);
       } else {
         console.log('File not found:', filePath);
-        setContent('');
         setFrontmatter(null);
+        setMDXContent(null);
       }
       setLoading(false);
     };
@@ -98,7 +74,7 @@ export default function SessionPage() {
     );
   }
 
-  if (!content) {
+  if (!MDXContent) {
     return (
       <div className="container session-detail-page">
         <div className="content-wrapper">
@@ -125,7 +101,7 @@ export default function SessionPage() {
                 maxHeight: '400px',
                 objectFit: 'cover',
                 borderRadius: '8px',
-                marginBottom: '2rem',
+                marginBottom: '1rem',
               }}
             />
           )}
@@ -134,7 +110,9 @@ export default function SessionPage() {
               {frontmatter.title}
             </h1>
           )}
-          <ReactMarkdown>{content}</ReactMarkdown>
+          <MDXProvider components={components}>
+            <MDXContent />
+          </MDXProvider>
         </div>
       </div>
     </div>

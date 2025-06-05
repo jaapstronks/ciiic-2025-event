@@ -1,0 +1,48 @@
+.video-container {
+  margin-bottom: 0.5rem;
+}
+
+.video-description {
+  font-size: 0.9rem;
+  margin-top: 0;
+  color: #666;
+  line-height: 1.4;
+}
+
+.video-description p {
+  margin-top: 0;
+}
+
+.video-transcript {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.video-transcript summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  padding: 0.5rem 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.video-transcript summary:hover {
+  color: #000;
+}
+
+.transcript-content {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.video-transcript:hover .transcript-content {
+  display: none;
+}
+
+.transcript-content p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: #444;
+}

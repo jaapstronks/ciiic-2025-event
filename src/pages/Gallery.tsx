@@ -1,5 +1,6 @@
 import ImageGallery from '../components/ImageGallery';
 import { images } from '../data/images';
+import '../components/Gallery.css';
 
 export default function Gallery() {
   return (

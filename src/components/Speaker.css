@@ -1,0 +1,12 @@
+.speaker-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .speaker-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

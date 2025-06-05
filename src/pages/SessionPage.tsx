@@ -2,11 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import Video from '../components/Video';
-import Speaker from '../components/Speaker';
+import Speaker, {
+  SpeakerContainer,
+} from '../components/Speaker';
 
 type Frontmatter = {
   title?: string;
   featuredImage?: string;
+  intro?: string;
   [key: string]: unknown;
 };
 
@@ -25,6 +28,7 @@ const mdxFiles = import.meta.glob<MDXModule>(
 const components = {
   Video,
   Speaker,
+  SpeakerContainer,
 };
 
 console.log('Available MDX files:', Object.keys(mdxFiles));
@@ -64,6 +68,9 @@ export default function SessionPage() {
     if (id) loadSession();
   }, [id]);
 
+  // Helper to extract the intro paragraph from frontmatter or content
+  // (for now, we expect a frontmatter.intro or will extract the first paragraph in the MDX files manually)
+
   if (loading) {
     return (
       <div className="container session-detail-page">
@@ -93,6 +100,11 @@ export default function SessionPage() {
     <div className="container session-detail-page">
       <div className="content-wrapper">
         <div className="content">
+          {frontmatter?.title && (
+            <h1 style={{ marginBottom: '1.5rem' }}>
+              {frontmatter.title}
+            </h1>
+          )}
           {frontmatter?.featuredImage && (
             <img
               src={frontmatter.featuredImage}
@@ -103,15 +115,23 @@ export default function SessionPage() {
                 maxHeight: '400px',
                 objectFit: 'cover',
                 borderRadius: '8px',
-                marginBottom: '1rem',
+                marginBottom: '1.5rem',
               }}
             />
           )}
-          {frontmatter?.title && (
-            <h1 style={{ marginBottom: '2rem' }}>
-              {frontmatter.title}
-            </h1>
+          {/* Introduction paragraph, if present in frontmatter.intro */}
+          {frontmatter?.intro && (
+            <p
+              style={{
+                fontSize: '1.25rem',
+                marginBottom: '2rem',
+                color: '#222',
+              }}
+            >
+              {frontmatter.intro}
+            </p>
           )}
+          {/* Speakers will be rendered by MDX content, so just render the rest of the content here */}
           <MDXProvider components={components}>
             <MDXContent />
           </MDXProvider>

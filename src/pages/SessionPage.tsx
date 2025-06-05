@@ -47,24 +47,14 @@ export default function SessionPage() {
       console.log('File exists:', !!mdxFiles[filePath]);
 
       if (mdxFiles[filePath]) {
-        try {
-          const module = mdxFiles[filePath];
-          console.log('Module:', module);
-
-          if (module.frontmatter) {
-            setFrontmatter(module.frontmatter);
-          }
-
-          setMDXContent(() => module.default);
-        } catch (error) {
-          console.error('Error loading session:', error);
-          setMDXContent(null);
-          setFrontmatter(null);
-        }
+        const module = mdxFiles[filePath];
+        console.log('Module:', module);
+        setFrontmatter(module.frontmatter ?? null);
+        setMDXContent(() => module.default);
       } else {
         console.log('File not found:', filePath);
-        setMDXContent(null);
         setFrontmatter(null);
+        setMDXContent(null);
       }
       setLoading(false);
     };

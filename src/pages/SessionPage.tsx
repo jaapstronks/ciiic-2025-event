@@ -10,6 +10,8 @@ type Frontmatter = {
   title?: string;
   featuredImage?: string;
   intro?: string;
+  location?: string;
+  sessionCode?: string;
   [key: string]: unknown;
 };
 
@@ -102,22 +104,43 @@ export default function SessionPage() {
         <div className="content">
           {frontmatter?.title && (
             <h1 style={{ marginBottom: '1.5rem' }}>
+              {frontmatter.sessionCode &&
+                `${frontmatter.sessionCode}: `}
               {frontmatter.title}
             </h1>
           )}
           {frontmatter?.featuredImage && (
-            <img
-              src={frontmatter.featuredImage}
-              alt={frontmatter.title || ''}
-              style={{
-                width: '100%',
-                height: 'auto',
-                maxHeight: '400px',
-                objectFit: 'cover',
-                borderRadius: '8px',
-                marginBottom: '1.5rem',
-              }}
-            />
+            <div style={{ position: 'relative' }}>
+              <img
+                src={frontmatter.featuredImage}
+                alt={frontmatter.title || ''}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: '400px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  marginBottom: '1.5rem',
+                }}
+              />
+              {frontmatter.location && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    color: 'white',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '4px',
+                    fontFamily: 'JetBrains Mono, monospace',
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  {frontmatter.location}
+                </div>
+              )}
+            </div>
           )}
           {/* Introduction paragraph, if present in frontmatter.intro */}
           {frontmatter?.intro && (

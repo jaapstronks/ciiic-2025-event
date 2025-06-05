@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface ImageData {
   src: string;
   alt: string;

@@ -101,7 +101,7 @@ export default function SessionPage() {
                 maxHeight: '400px',
                 objectFit: 'cover',
                 borderRadius: '8px',
-                marginBottom: '2rem',
+                marginBottom: '1rem',
               }}
             />
           )}

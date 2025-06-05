@@ -1,11 +1,18 @@
 import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
+import { useState } from 'react';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="layout">
       <header className="header">
@@ -22,17 +29,56 @@ const Layout = ({ children }: LayoutProps) => {
               </h1>
             </div>
           </Link>
-          <nav className="nav">
-            <Link to="/" className="nav-link">
+          <button
+            className="hamburger-button"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <span
+              className={`hamburger-line ${
+                isMenuOpen ? 'open' : ''
+              }`}
+            ></span>
+            <span
+              className={`hamburger-line ${
+                isMenuOpen ? 'open' : ''
+              }`}
+            ></span>
+            <span
+              className={`hamburger-line ${
+                isMenuOpen ? 'open' : ''
+              }`}
+            ></span>
+          </button>
+          <nav
+            className={`nav ${isMenuOpen ? 'open' : ''}`}
+          >
+            <Link
+              to="/"
+              className="nav-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Home
             </Link>
-            <Link to="/sessions" className="nav-link">
+            <Link
+              to="/sessions"
+              className="nav-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Sessions
             </Link>
-            <Link to="/videos" className="nav-link">
+            <Link
+              to="/videos"
+              className="nav-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Videos
             </Link>
-            <Link to="/gallery" className="nav-link">
+            <Link
+              to="/gallery"
+              className="nav-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Gallery
             </Link>
           </nav>

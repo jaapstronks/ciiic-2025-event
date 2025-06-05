@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import Video from '../components/Video';
+import Speaker from '../components/Speaker';
 
 type Frontmatter = {
   title?: string;
@@ -23,6 +24,7 @@ const mdxFiles = import.meta.glob<MDXModule>(
 
 const components = {
   Video,
+  Speaker,
 };
 
 console.log('Available MDX files:', Object.keys(mdxFiles));

@@ -1,0 +1,39 @@
+.video-container {
+  margin: 2rem 0;
+}
+
+.video-description {
+  margin: 1rem 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.video-transcript {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.video-transcript summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  padding: 0.5rem 0;
+}
+
+.video-transcript summary:hover {
+  color: #000;
+}
+
+.transcript-content {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.transcript-content p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: #444;
+}

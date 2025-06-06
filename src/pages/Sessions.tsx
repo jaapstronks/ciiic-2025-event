@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import SessionCard from '../components/SessionCard';
+import SEO from '../components/SEO';
 
 interface Session {
   id: string;
@@ -95,24 +96,31 @@ export default function SessionsPage() {
   }, []);
 
   return (
-    <div className="container sessions-page">
-      <div className="content-wrapper">
-        <div className="content">
-          <h1>Sessions</h1>
-          <div className="sessions-grid">
-            {sessions.map((session) => (
-              <SessionCard
-                key={session.id}
-                id={session.id}
-                title={session.title}
-                featuredImage={session.featuredImage}
-                location={session.location}
-                sessionCode={session.sessionCode}
-              />
-            ))}
+    <>
+      <SEO
+        title="Sessions"
+        description="Browse all sessions from the CIIIC Annual Meet-Up 2025. Discover talks, workshops, and more."
+        image={undefined}
+      />
+      <div className="container sessions-container">
+        <div className="content-wrapper">
+          <div className="content">
+            <h1>Sessions</h1>
+            <div className="sessions-grid">
+              {sessions.map((session) => (
+                <SessionCard
+                  key={session.id}
+                  id={session.id}
+                  title={session.title}
+                  featuredImage={session.featuredImage}
+                  location={session.location}
+                  sessionCode={session.sessionCode}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

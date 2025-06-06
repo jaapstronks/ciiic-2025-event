@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../components/VideoPlayer';
 import SessionCard from '../components/SessionCard';
+import SEO from '../components/SEO';
 
 interface Session {
   id: string;
@@ -97,48 +98,56 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="content-wrapper">
-        <div className="content">
-          <h1>CIIIC Annual Meet-Up 2025</h1>
+    <>
+      <SEO
+        title="CIIIC Annual Meet-Up 2025"
+        description="Report and highlights from the first annual CIIIC meetup, where researchers, makers, and policymakers shape the future of immersive experiences in the Netherlands."
+        image={undefined}
+      />
+      <div className="container">
+        <div className="content-wrapper">
+          <div className="content">
+            <h1>CIIIC Annual Meet-Up 2025</h1>
 
-          <div className="video-section">
-            <VideoPlayer
-              playbackId="78Xt01600lBARM004ycsUYwdmIorcQaVN1bBUBm29QpShA"
-              title="Ride The Immersive Wave"
-              description="The introduction video of CIIIC Annual Meet-Up 2025"
-              transcript="Hello? The third digital wave is in motion. Immersive. Expansive. Propelled by AI, it moves faster. Already reshaping how we engage with the world. It's not a trend, not a trick of light, but as a force for impact. This is not just about technology. It's about how we create meaning. To see history through new eyes. To train empathy through experience. To build not just tools, but trust. To guide this wave, the Netherlands launched CIIIC, the Creative Industries Immersive Impact Coalition, a national program to turn potential into practice. We invest in people, training skills, growing talent and sharing knowledge. We support makers and public organisations alike. And we build towards access for all so everyone can take part. CIIIC connects labs, studios, schools, ministries. Because only together can we make the impact that matters. From immersive classrooms to safer streets. From cultural storytelling to therapeutic environments. The third wave is global and it is moving fast. Dive in, sign up for our calls, build with us. Let's shape this wave together."
-            />
-          </div>
-
-          <div className="intro-text">
-            <p>
-              Welcome to the report of the first annual
-              CIIIC meetup, where researchers, makers, and
-              policymakers came together to shape the future
-              of immersive experiences in the Netherlands.
-              Explore the sessions below, or visit our{' '}
-              <Link to="/gallery">photo gallery</Link> and{' '}
-              <Link to="/videos">video collection</Link> for
-              more insights from the event.
-            </p>
-          </div>
-
-          <h2>Sessions</h2>
-          <div className="sessions-grid">
-            {sessions.map((session) => (
-              <SessionCard
-                key={session.id}
-                id={session.id}
-                title={session.title}
-                featuredImage={session.featuredImage}
-                location={session.location}
-                sessionCode={session.sessionCode}
+            <div className="video-section">
+              <VideoPlayer
+                playbackId="78Xt01600lBARM004ycsUYwdmIorcQaVN1bBUBm29QpShA"
+                title="Ride The Immersive Wave"
+                description="The introduction video of CIIIC Annual Meet-Up 2025"
+                transcript="Hello? The third digital wave is in motion. Immersive. Expansive. Propelled by AI, it moves faster. Already reshaping how we engage with the world. It's not a trend, not a trick of light, but as a force for impact. This is not just about technology. It's about how we create meaning. To see history through new eyes. To train empathy through experience. To build not just tools, but trust. To guide this wave, the Netherlands launched CIIIC, the Creative Industries Immersive Impact Coalition, a national program to turn potential into practice. We invest in people, training skills, growing talent and sharing knowledge. We support makers and public organisations alike. And we build towards access for all so everyone can take part. CIIIC connects labs, studios, schools, ministries. Because only together can we make the impact that matters. From immersive classrooms to safer streets. From cultural storytelling to therapeutic environments. The third wave is global and it is moving fast. Dive in, sign up for our calls, build with us. Let's shape this wave together."
               />
-            ))}
+            </div>
+
+            <div className="intro-text">
+              <p>
+                Welcome to the report of the first annual
+                CIIIC meetup, where researchers, makers, and
+                policymakers came together to shape the
+                future of immersive experiences in the
+                Netherlands. Explore the sessions below, or
+                visit our{' '}
+                <Link to="/gallery">photo gallery</Link> and{' '}
+                <Link to="/videos">video collection</Link>{' '}
+                for more insights from the event.
+              </p>
+            </div>
+
+            <h2>Sessions</h2>
+            <div className="sessions-grid">
+              {sessions.map((session) => (
+                <SessionCard
+                  key={session.id}
+                  id={session.id}
+                  title={session.title}
+                  featuredImage={session.featuredImage}
+                  location={session.location}
+                  sessionCode={session.sessionCode}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

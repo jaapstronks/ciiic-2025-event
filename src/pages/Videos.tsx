@@ -1,4 +1,5 @@
 import VideoPlayer from '../components/VideoPlayer';
+import SEO from '../components/SEO';
 
 interface Video {
   id: number;
@@ -78,25 +79,32 @@ I'm super honoured and excited that we won last week in Cannes at the Film Festi
 
 export default function Videos() {
   return (
-    <div className="container">
-      <div className="content-wrapper">
-        <div className="content">
-          <h1>Videos</h1>
-          <div className="videos-grid">
-            {videos.map((video) => (
-              <div key={video.id} className="video-item">
-                <h2>{video.title}</h2>
-                <VideoPlayer
-                  playbackId={video.playbackId}
-                  title={video.title}
-                  description={video.description}
-                  transcript={video.transcript}
-                />
-              </div>
-            ))}
+    <>
+      <SEO
+        title="Videos"
+        description="Video collection from the CIIIC Annual Meet-Up 2025. Watch highlights and interviews from the event."
+        image={undefined}
+      />
+      <div className="container">
+        <div className="content-wrapper">
+          <div className="content">
+            <h1>Videos</h1>
+            <div className="videos-grid">
+              {videos.map((video) => (
+                <div key={video.id} className="video-item">
+                  <h2>{video.title}</h2>
+                  <VideoPlayer
+                    playbackId={video.playbackId}
+                    title={video.title}
+                    description={video.description}
+                    transcript={video.transcript}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

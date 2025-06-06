@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import Video from '../components/Video';
@@ -36,6 +36,21 @@ const components = {
 
 console.log('Available MDX files:', Object.keys(mdxFiles));
 
+// Helper function to get session order (copied from Sessions.tsx)
+type NavSession = {
+  id: string;
+  title: string;
+  sessionCode?: string;
+};
+function getSessionOrder(session: NavSession): number {
+  if (session.id === 'opening') return 0;
+  if (session.id === 'wrap-up') return 100;
+  const code = session.sessionCode;
+  if (!code) return 50;
+  const [block, letter] = code.split('');
+  return parseInt(block) * 10 + letter.charCodeAt(0) - 65;
+}
+
 export default function SessionPage() {
   const { id } = useParams<{ id: string }>();
   const [MDXContent, setMDXContent] =
@@ -43,6 +58,9 @@ export default function SessionPage() {
   const [frontmatter, setFrontmatter] =
     useState<Frontmatter | null>(null);
   const [loading, setLoading] = useState(true);
+  const [allSessions, setAllSessions] = useState<
+    NavSession[]
+  >([]);
 
   useEffect(() => {
     const loadSession = async () => {
@@ -70,6 +88,27 @@ export default function SessionPage() {
 
     if (id) loadSession();
   }, [id]);
+
+  useEffect(() => {
+    // Load all session frontmatters for navigation
+    const sessions: NavSession[] = Object.entries(
+      mdxFiles
+    ).map(([path, mod]) => {
+      const id =
+        path.split('/').pop()?.replace('.mdx', '') || '';
+      return {
+        id,
+        title: mod.frontmatter?.title || 'Untitled Session',
+        sessionCode: mod.frontmatter?.sessionCode as
+          | string
+          | undefined,
+      };
+    });
+    sessions.sort(
+      (a, b) => getSessionOrder(a) - getSessionOrder(b)
+    );
+    setAllSessions(sessions);
+  }, []);
 
   // Helper to extract the intro paragraph from frontmatter or content
   // (for now, we expect a frontmatter.intro or will extract the first paragraph in the MDX files manually)
@@ -167,6 +206,47 @@ export default function SessionPage() {
               <MDXContent />
             </MDXProvider>
           </div>
+        </div>
+        {/* Navigation for previous/next session */}
+        <div
+          className="session-nav"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '2rem',
+          }}
+        >
+          {allSessions.length > 0 &&
+            id &&
+            (() => {
+              const idx = allSessions.findIndex(
+                (s) => s.id === id
+              );
+              const prev =
+                idx > 0 ? allSessions[idx - 1] : null;
+              const next =
+                idx < allSessions.length - 1
+                  ? allSessions[idx + 1]
+                  : null;
+              return (
+                <>
+                  <div>
+                    {prev && (
+                      <Link to={`/sessions/${prev.id}`}>
+                        ← {prev.title}
+                      </Link>
+                    )}
+                  </div>
+                  <div>
+                    {next && (
+                      <Link to={`/sessions/${next.id}`}>
+                        {next.title} →
+                      </Link>
+                    )}
+                  </div>
+                </>
+              );
+            })()}
         </div>
       </div>
     </>

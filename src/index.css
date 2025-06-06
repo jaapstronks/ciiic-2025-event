@@ -125,6 +125,11 @@ h6 {
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1rem 0;
+  color: #e0f7fa;
+}
+
+.footer p {
+  color: #e0f7fa;
 }
 
 /* Sessions page specific styles */
@@ -483,4 +488,18 @@ li:last-child {
   .videos-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Previous/Next navigation styles for session page */
+.session-detail-page .session-nav {
+  color: #e0f7fa;
+  font-weight: 500;
+}
+.session-detail-page .session-nav a {
+  color: #e0f7fa;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.session-detail-page .session-nav a:hover {
+  color: #fff;
 }

@@ -100,9 +100,9 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="CIIIC Annual Meet-Up 2025"
+        title="CIIIC Meet-Up 2025 - reports and media"
         description="Report and highlights from the first annual CIIIC meetup, where researchers, makers, and policymakers shape the future of immersive experiences in the Netherlands."
-        image={undefined}
+        image="/images/CIIIC-ogimage.jpeg"
       />
       <div className="container">
         <div className="content-wrapper">

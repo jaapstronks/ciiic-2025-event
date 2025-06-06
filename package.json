@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "preinstall": "npx npm@10 install --legacy-peer-deps || true"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",

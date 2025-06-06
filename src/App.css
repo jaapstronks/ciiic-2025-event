@@ -63,6 +63,15 @@
   margin: 0;
 }
 
+/* Lead paragraph styles */
+.lead {
+  font-size: 1.5rem !important;
+  line-height: 1.6 !important;
+  color: #222;
+  margin-bottom: 2rem !important;
+  font-weight: 400;
+}
+
 .sessions-grid {
   display: grid;
   grid-template-columns: repeat(

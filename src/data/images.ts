@@ -2,9 +2,11 @@ export interface Image {
   src: string;
   alt: string;
   caption?: string;
+  width?: number;
+  height?: number;
 }
 
-export const images: Image[] = [
+const rawImages: Image[] = [
   {
     src: '/images/01_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_0886.jpeg',
     alt: 'Overhead view of people interacting at a CIIIC Annual Meet-up booth with name tags and a yellow banner nearby.',
@@ -879,3 +881,12 @@ export const images: Image[] = [
       'A person speaks into a microphone at a podium during the CIIIC Annual Meet-up, with an audience listening attentively.',
   },
 ];
+
+const DEFAULT_WIDTH = 1600;
+const DEFAULT_HEIGHT = 1066;
+
+export const images: Image[] = rawImages.map((image) => ({
+  ...image,
+  width: image.width ?? DEFAULT_WIDTH,
+  height: image.height ?? DEFAULT_HEIGHT,
+}));

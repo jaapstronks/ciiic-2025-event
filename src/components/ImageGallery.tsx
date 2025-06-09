@@ -2,16 +2,10 @@ import { useEffect } from 'react';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import PhotoSwipe from 'photoswipe';
 import 'photoswipe/style.css';
-
-interface ImageData {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-}
+import type { Image } from '../data/images';
 
 interface ImageGalleryProps {
-  images: ImageData[];
+  images: Image[];
 }
 
 export default function ImageGallery({
@@ -49,12 +43,16 @@ export default function ImageGallery({
           <img
             src={image.src}
             alt={image.alt}
-            width={image.width}
-            height={image.height}
+            width={400}
+            height={Math.round(
+              (400 * image.height) / image.width
+            )}
             className="gallery-image"
             loading="lazy"
           />
-          <div className="gallery-caption">{image.alt}</div>
+          <div className="gallery-caption">
+            {image.caption || image.alt}
+          </div>
         </a>
       ))}
     </div>

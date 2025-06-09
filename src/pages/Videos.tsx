@@ -75,6 +75,15 @@ I'm super honoured and excited that we won last week in Cannes at the Film Festi
       'Danny van Zuijlen, creative producer at Studio Immersief, talks about using immersive tech to explore complex stories across domains and emphasizes the need for shared language and collaboration across sectors.',
     transcript: `For me as a creative person, the great strength of IX is that you can travel in time telling different stories and through those stories talk with other dimensions. It's very important that multiple fields learn how to use it so that everybody from their own angle can tell different ways of stories. The most important value in my opinion of the IX field is that we learn how to solve future problems together. And as a creative you have a different angle or how you look to things. And for example at the police case I hope that future creatives can help solve problems in investigations and perhaps murders, you name it. I think it's very important that public values are part of this program because we as the creators have to learn the other language in collaborations. So how more we learn that language of other parties and companies, how more we can help to solve problems. For example, in the hospital they speak in other languages that we don't always understand as creative people. So you want to solve a problem, but if you don't understand each other in how to solve it, you have a problem. And I hope by this program we learn how to talk with each other. I hope to contribute that a young generation, new people, young people, people from school are feeling welcome to step in this new field. The key for success for e-access is that we really believe in the technology behind it and we keep our faith in it.`,
   },
+  {
+    id: 8,
+    title: 'After Movie',
+    playbackId:
+      'EQ01PCb702XETEQZayVmS01oyFgABnGMbx4i6GvV27F61U',
+    description:
+      'Watch the after movie of the CIIIC Annual Meet-Up 2025',
+    transcript: `Speaker 1 There are significant challenges in the adoption of IX technologies. So keeping your user at the center of your experience as you explore this technology will be absolutely key to its success. For me as a maker, as a creator of these works, it's making the audience member central in the piece. I can tell a different type of stories that I can't tell on an opera stage.  So I think the key to success for IX is the combination of technology. Cross-sexual collaboration, finding ways in which IX can really make a meaningful difference in healthcare, in media, culture, education. Learning from the development in the technology, I think that's the key. The key to success is time and persistence. We're in for the long run. Make it time.`,
+  },
 ];
 
 export default function Videos() {

@@ -101,3 +101,33 @@
 .pswp__button--arrow--right:hover:before {
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+.gallery-section {
+  margin-bottom: 3rem;
+}
+
+.gallery-section:last-child {
+  margin-bottom: 0;
+}
+
+.gallery-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.gallery-credit {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.gallery-credit a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.gallery-credit a:hover {
+  color: var(--accent-color);
+}

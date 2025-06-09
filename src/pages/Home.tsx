@@ -39,6 +39,8 @@ const getSessionOrder = (session: Session): number => {
 
 export default function Home() {
   const [sessions, setSessions] = useState<Session[]>([]);
+  const [isLightboxOpen, setIsLightboxOpen] =
+    useState(false);
 
   useEffect(() => {
     const loadSessions = async () => {
@@ -107,43 +109,143 @@ export default function Home() {
       <div className="container">
         <div className="content-wrapper">
           <div className="content">
-            <h1>CIIIC Annual Meet-Up 2025</h1>
-
-            <div className="video-section">
-              <VideoPlayer
-                playbackId="78Xt01600lBARM004ycsUYwdmIorcQaVN1bBUBm29QpShA"
-                title="Ride The Immersive Wave"
-                description="The introduction video of CIIIC Annual Meet-Up 2025"
-                transcript="Hello? The third digital wave is in motion. Immersive. Expansive. Propelled by AI, it moves faster. Already reshaping how we engage with the world. It's not a trend, not a trick of light, but as a force for impact. This is not just about technology. It's about how we create meaning. To see history through new eyes. To train empathy through experience. To build not just tools, but trust. To guide this wave, the Netherlands launched CIIIC, the Creative Industries Immersive Impact Coalition, a national program to turn potential into practice. We invest in people, training skills, growing talent and sharing knowledge. We support makers and public organisations alike. And we build towards access for all so everyone can take part. CIIIC connects labs, studios, schools, ministries. Because only together can we make the impact that matters. From immersive classrooms to safer streets. From cultural storytelling to therapeutic environments. The third wave is global and it is moving fast. Dive in, sign up for our calls, build with us. Let's shape this wave together."
-              />
-            </div>
-
-            <div className="intro-text">
-              <p>
-                Welcome to the report of the first annual
-                CIIIC meetup, where researchers, makers, and
-                policymakers came together to shape the
-                future of immersive experiences in the
-                Netherlands. Explore the sessions below, or
-                visit our{' '}
-                <Link to="/gallery">photo gallery</Link> and{' '}
-                <Link to="/videos">video collection</Link>{' '}
-                for more insights from the event.
-              </p>
-            </div>
-
-            <h2>Sessions</h2>
-            <div className="sessions-grid">
-              {sessions.map((session) => (
-                <SessionCard
-                  key={session.id}
-                  id={session.id}
-                  title={session.title}
-                  featuredImage={session.featuredImage}
-                  location={session.location}
-                  sessionCode={session.sessionCode}
+            {/* Hero Section */}
+            <div className="hero-section">
+              <div className="hero-content">
+                <h1>CIIIC Annual Meet-Up 2025</h1>
+                <p className="hero-subtitle">
+                  Shaping the future of immersive
+                  experiences in the Netherlands
+                </p>
+                <div className="cta-buttons">
+                  <Link
+                    to="/sessions"
+                    className="cta-button primary"
+                  >
+                    Explore Sessions
+                  </Link>
+                  <Link
+                    to="/videos"
+                    className="cta-button secondary"
+                  >
+                    Watch Videos
+                  </Link>
+                </div>
+              </div>
+              <div className="hero-image">
+                <img
+                  src="/images/CIIIC-ogimage.jpeg"
+                  alt="CIIIC Annual Meet-Up 2025"
+                  className="poster-image"
                 />
-              ))}
+              </div>
+            </div>
+
+            {/* Introduction Section with Video */}
+            <div className="intro-section">
+              <div className="intro-content">
+                <h2>Event Summary</h2>
+                <p>
+                  The Creative Industries Immersive Impact
+                  Coalition (CIIIC) hosted its first Annual
+                  Meet-Up, bringing together creators,
+                  researchers, businesses, and policymakers
+                  from the Dutch immersive industry.
+                </p>
+                <p>
+                  The event explored new opportunities in
+                  immersive experiences (IX) and civic
+                  engagement through a series of
+                  presentations, workshops, and discussions.
+                  Speakers and participants examined both
+                  the innovative potential and societal
+                  impact of immersive technologies.
+                </p>
+                <p>
+                  The program included interactive breakout
+                  sessions where participants engaged with
+                  CIIIC calls and labs, followed by
+                  networking opportunities throughout the
+                  day.
+                </p>
+              </div>
+              <div className="intro-video">
+                <h2>Ride The Immersive Wave</h2>
+                <div className="video-container">
+                  <VideoPlayer
+                    playbackId="78Xt01600lBARM004ycsUYwdmIorcQaVN1bBUBm29QpShA"
+                    title="Ride The Immersive Wave"
+                    description="The introduction video of CIIIC Annual Meet-Up 2025"
+                    transcript="Hello? The third digital wave is in motion. Immersive. Expansive. Propelled by AI, it moves faster. Already reshaping how we engage with the world. It's not a trend, not a trick of light, but as a force for impact. This is not just about technology. It's about how we create meaning. To see history through new eyes. To train empathy through experience. To build not just tools, but trust. To guide this wave, the Netherlands launched CIIIC, the Creative Industries Immersive Impact Coalition, a national program to turn potential into practice. We invest in people, training skills, growing talent and sharing knowledge. We support makers and public organisations alike. And we build towards access for all so everyone can take part. CIIIC connects labs, studios, schools, ministries. Because only together can we make the impact that matters. From immersive classrooms to safer streets. From cultural storytelling to therapeutic environments. The third wave is global and it is moving fast. Dive in, sign up for our calls, build with us. Let's shape this wave together."
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Poster Section */}
+            <div className="poster-section">
+              <div className="poster-container">
+                <img
+                  src="/images/illustrations/poster.jpg"
+                  alt="CIIIC Annual Meet-Up 2025 Poster"
+                  className="poster-image"
+                  onClick={() => setIsLightboxOpen(true)}
+                />
+                <p className="poster-credit">
+                  Illustration by{' '}
+                  <a
+                    href="https://suusvandenakker.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Suus van den Akker
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            {/* Lightbox */}
+            {isLightboxOpen && (
+              <div
+                className="lightbox"
+                onClick={() => setIsLightboxOpen(false)}
+              >
+                <div className="lightbox-content">
+                  <img
+                    src="/images/illustrations/poster.jpg"
+                    alt="CIIIC Annual Meet-Up 2025 Poster"
+                  />
+                  <button
+                    className="lightbox-close"
+                    onClick={() => setIsLightboxOpen(false)}
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Sessions Section */}
+            <div className="sessions-section">
+              <h2>Explore the Sessions</h2>
+              <p className="section-intro">
+                Browse through the session summaries and
+                recordings from the event. Each session
+                covers different aspects of immersive
+                technology and its applications.
+              </p>
+              <div className="sessions-grid">
+                {sessions.map((session) => (
+                  <SessionCard
+                    key={session.id}
+                    id={session.id}
+                    title={session.title}
+                    featuredImage={session.featuredImage}
+                    location={session.location}
+                    sessionCode={session.sessionCode}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

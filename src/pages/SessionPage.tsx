@@ -1,55 +1,15 @@
-import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
-import Video from '../components/Video';
-import Speaker, {
-  SpeakerContainer,
-} from '../components/Speaker';
+import Layout from '../components/Layout';
+import { components } from '../content/mdx-components';
+import { mdxFiles } from '../content/mdx-files';
+import type {
+  Frontmatter,
+  NavSession,
+  MDXModule,
+} from '../types';
 import SEO from '../components/SEO';
-
-type Frontmatter = {
-  title?: string;
-  featuredImage?: string;
-  intro?: string;
-  location?: string;
-  sessionCode?: string;
-  [key: string]: unknown;
-};
-
-type MDXModule = {
-  default: React.ComponentType;
-  frontmatter?: Frontmatter;
-};
-
-const mdxFiles = import.meta.glob<MDXModule>(
-  '../content/*.mdx',
-  {
-    eager: true,
-  }
-);
-
-const components = {
-  Video,
-  Speaker,
-  SpeakerContainer,
-};
-
-console.log('Available MDX files:', Object.keys(mdxFiles));
-
-// Helper function to get session order (copied from Sessions.tsx)
-type NavSession = {
-  id: string;
-  title: string;
-  sessionCode?: string;
-};
-function getSessionOrder(session: NavSession): number {
-  if (session.id === 'opening') return 0;
-  if (session.id === 'wrap-up') return 100;
-  const code = session.sessionCode;
-  if (!code) return 50;
-  const [block, letter] = code.split('');
-  return parseInt(block) * 10 + letter.charCodeAt(0) - 65;
-}
 
 export default function SessionPage() {
   const { id } = useParams<{ id: string }>();
@@ -74,7 +34,7 @@ export default function SessionPage() {
       console.log('File exists:', !!mdxFiles[filePath]);
 
       if (mdxFiles[filePath]) {
-        const module = mdxFiles[filePath];
+        const module = mdxFiles[filePath] as MDXModule;
         console.log('Module:', module);
         setFrontmatter(module.frontmatter ?? null);
         setMDXContent(() => module.default);
@@ -96,12 +56,12 @@ export default function SessionPage() {
     ).map(([path, mod]) => {
       const id =
         path.split('/').pop()?.replace('.mdx', '') || '';
+      const module = mod as MDXModule;
       return {
         id,
-        title: mod.frontmatter?.title || 'Untitled Session',
-        sessionCode: mod.frontmatter?.sessionCode as
-          | string
-          | undefined,
+        title:
+          module.frontmatter?.title || 'Untitled Session',
+        sessionCode: module.frontmatter?.sessionCode,
       };
     });
     sessions.sort(
@@ -110,51 +70,59 @@ export default function SessionPage() {
     setAllSessions(sessions);
   }, []);
 
-  // Helper to extract the intro paragraph from frontmatter or content
-  // (for now, we expect a frontmatter.intro or will extract the first paragraph in the MDX files manually)
+  // Helper function to get session order
+  function getSessionOrder(session: NavSession): number {
+    if (session.id === 'opening') return 0;
+    if (session.id === 'wrap-up') return 100;
+
+    const code = session.sessionCode;
+    if (!code) return 50;
+
+    const [block, letter] = code.split('');
+    return parseInt(block) * 10 + letter.charCodeAt(0) - 65;
+  }
 
   if (loading) {
     return (
-      <div className="container session-detail-page">
-        <div className="content-wrapper">
-          <div className="content">
-            <p>Loading...</p>
+      <Layout>
+        <div className="container session-detail-page">
+          <div className="content-wrapper">
+            <div className="content">
+              <p>Loading...</p>
+            </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
   if (!MDXContent) {
     return (
-      <div className="container session-detail-page">
-        <div className="content-wrapper">
-          <div className="content">
-            <h1>Session Not Found</h1>
-            <p>The requested session could not be found.</p>
+      <Layout>
+        <div className="container session-detail-page">
+          <div className="content-wrapper">
+            <div className="content">
+              <h1>Session Not Found</h1>
+              <p>
+                The requested session could not be found.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
   return (
-    <>
+    <Layout>
       <SEO
         title={frontmatter?.title || 'Session'}
-        description={frontmatter?.intro || 'CIIIC session'}
-        image={frontmatter?.featuredImage}
+        description={frontmatter?.intro || ''}
       />
       <div className="container session-detail-page">
         <div className="content-wrapper">
           <div className="content">
-            {frontmatter?.title && (
-              <h1 style={{ marginBottom: '1.5rem' }}>
-                {frontmatter.sessionCode &&
-                  `${frontmatter.sessionCode}: `}
-                {frontmatter.title}
-              </h1>
-            )}
+            <h1>{frontmatter?.title}</h1>
             {frontmatter?.featuredImage && (
               <div style={{ position: 'relative' }}>
                 <img
@@ -189,7 +157,6 @@ export default function SessionPage() {
                 )}
               </div>
             )}
-            {/* Introduction paragraph, if present in frontmatter.intro */}
             {frontmatter?.intro && (
               <p
                 style={{
@@ -201,13 +168,11 @@ export default function SessionPage() {
                 {frontmatter.intro}
               </p>
             )}
-            {/* Speakers will be rendered by MDX content, so just render the rest of the content here */}
             <MDXProvider components={components}>
               <MDXContent />
             </MDXProvider>
           </div>
         </div>
-        {/* Navigation for previous/next session */}
         <div
           className="session-nav"
           style={{
@@ -249,6 +214,6 @@ export default function SessionPage() {
             })()}
         </div>
       </div>
-    </>
+    </Layout>
   );
 }

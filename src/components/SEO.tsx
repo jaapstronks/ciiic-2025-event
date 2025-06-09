@@ -6,7 +6,8 @@ interface SEOProps {
   image?: string;
 }
 
-const FALLBACK_IMAGE = '/images/CIIIC-ogimage.jpeg';
+const FALLBACK_IMAGE =
+  'https://meetup2025.ciiic.nl/images/CIIIC-ogimage.jpeg';
 const SITE_NAME = 'CIIIC';
 const SITE_URL = 'https://ciiic.nl'; // Update if needed
 

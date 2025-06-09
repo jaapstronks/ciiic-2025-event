@@ -196,13 +196,13 @@ export default function Home() {
                 </p>
               </div>
               <div className="intro-video">
-                <h2>Ride The Immersive Wave</h2>
+                <h2>Meet-Up After Movie</h2>
                 <div className="video-container">
                   <VideoPlayer
-                    playbackId="78Xt01600lBARM004ycsUYwdmIorcQaVN1bBUBm29QpShA"
-                    title="Ride The Immersive Wave"
-                    description="The introduction video of CIIIC Annual Meet-Up 2025"
-                    transcript="Hello? The third digital wave is in motion. Immersive. Expansive. Propelled by AI, it moves faster. Already reshaping how we engage with the world. It's not a trend, not a trick of light, but as a force for impact. This is not just about technology. It's about how we create meaning. To see history through new eyes. To train empathy through experience. To build not just tools, but trust. To guide this wave, the Netherlands launched CIIIC, the Creative Industries Immersive Impact Coalition, a national program to turn potential into practice. We invest in people, training skills, growing talent and sharing knowledge. We support makers and public organisations alike. And we build towards access for all so everyone can take part. CIIIC connects labs, studios, schools, ministries. Because only together can we make the impact that matters. From immersive classrooms to safer streets. From cultural storytelling to therapeutic environments. The third wave is global and it is moving fast. Dive in, sign up for our calls, build with us. Let's shape this wave together."
+                    playbackId="EQ01PCb702XETEQZayVmS01oyFgABnGMbx4i6GvV27F61U"
+                    title="Meet-Up After Movie"
+                    description="Watch the after movie of the CIIIC Annual Meet-Up 2025"
+                    transcript="Speaker 1 There are significant challenges in the adoption of IX technologies. So keeping your user at the center of your experience as you explore this technology will be absolutely key to its success. For me as a maker, as a creator of these works, it's making the audience member central in the piece. I can tell a different type of stories that I can't tell on an opera stage.  So I think the key to success for IX is the combination of technology. Cross-sexual collaboration, finding ways in which IX can really make a meaningful difference in healthcare, in media, culture, education. Learning from the development in the technology, I think that's the key. The key to success is time and persistence. We're in for the long run. Make it time."
                   />
                 </div>
               </div>

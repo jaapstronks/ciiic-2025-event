@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { speakers } from '../data/speakers';
 
 interface SessionCardProps {
   id: string;
@@ -6,6 +7,7 @@ interface SessionCardProps {
   featuredImage: string;
   location?: string;
   sessionCode?: string;
+  speakerIds?: string[];
 }
 
 export default function SessionCard({
@@ -14,6 +16,7 @@ export default function SessionCard({
   featuredImage,
   location,
   sessionCode,
+  speakerIds,
 }: SessionCardProps) {
   return (
     <Link to={`/sessions/${id}`} className="session-card">
@@ -40,10 +43,39 @@ export default function SessionCard({
           </div>
         )}
       </div>
-      <h2 className="session-card-title">
-        {sessionCode && `${sessionCode}: `}
-        {title}
-      </h2>
+      <div className="session-card-content">
+        <h2 className="session-card-title">
+          {sessionCode && `${sessionCode}: `}
+          {title}
+        </h2>
+        {speakerIds && speakerIds.length > 0 && (
+          <div className="session-card-speakers">
+            {speakerIds.map((id) => {
+              const speaker = speakers[id];
+              return speaker ? (
+                <div
+                  key={id}
+                  className="session-card-speaker"
+                >
+                  <img
+                    src={speaker.image}
+                    alt={speaker.name}
+                    className="session-card-speaker-image"
+                  />
+                  <div className="session-card-speaker-info">
+                    <div className="session-card-speaker-name">
+                      {speaker.name}
+                    </div>
+                    <div className="session-card-speaker-title">
+                      {speaker.title}
+                    </div>
+                  </div>
+                </div>
+              ) : null;
+            })}
+          </div>
+        )}
+      </div>
     </Link>
   );
 }

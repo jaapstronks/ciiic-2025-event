@@ -6,6 +6,7 @@ import Speaker, {
   SpeakerContainer,
 } from '../components/Speaker';
 import SEO from '../components/SEO';
+import { speakers } from '../data/speakers';
 
 type Frontmatter = {
   title?: string;
@@ -13,6 +14,7 @@ type Frontmatter = {
   intro?: string;
   location?: string;
   sessionCode?: string;
+  speakers?: string[];
   [key: string]: unknown;
 };
 
@@ -34,8 +36,6 @@ const components = {
   SpeakerContainer,
 };
 
-console.log('Available MDX files:', Object.keys(mdxFiles));
-
 // Helper function to get session order (copied from Sessions.tsx)
 type NavSession = {
   id: string;
@@ -43,8 +43,13 @@ type NavSession = {
   sessionCode?: string;
 };
 function getSessionOrder(session: NavSession): number {
+  // Special ordering for opening, keynote, and program overview
   if (session.id === 'opening') return 0;
+  if (session.id === 'keynote-jeremy-dalton') return 1;
+  if (session.id === 'program-overview') return 2;
   if (session.id === 'wrap-up') return 100;
+
+  // For other sessions, use the session code
   const code = session.sessionCode;
   if (!code) return 50;
   const [block, letter] = code.split('');
@@ -201,6 +206,23 @@ export default function SessionPage() {
                 {frontmatter.intro}
               </p>
             )}
+            {/* Render speakers from frontmatter */}
+            {frontmatter?.speakers &&
+              frontmatter.speakers.length > 0 && (
+                <SpeakerContainer>
+                  {frontmatter.speakers.map((id) => {
+                    const speaker = speakers[id];
+                    return speaker ? (
+                      <Speaker
+                        key={id}
+                        name={speaker.name}
+                        title={speaker.title}
+                        image={speaker.image}
+                      />
+                    ) : null;
+                  })}
+                </SpeakerContainer>
+              )}
             {/* Speakers will be rendered by MDX content, so just render the rest of the content here */}
             <MDXProvider components={components}>
               <MDXContent />

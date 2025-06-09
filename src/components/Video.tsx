@@ -30,7 +30,7 @@ export default function Video({
         }}
       />
       {description && (
-        <div className="video-description">
+        <div className="video-info">
           <p>{description}</p>
         </div>
       )}

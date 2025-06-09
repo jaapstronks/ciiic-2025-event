@@ -57,19 +57,7 @@ export default function SessionCard({
                   key={id}
                   className="session-card-speaker"
                 >
-                  <img
-                    src={speaker.image}
-                    alt={speaker.name}
-                    className="session-card-speaker-image"
-                  />
-                  <div className="session-card-speaker-info">
-                    <div className="session-card-speaker-name">
-                      {speaker.name}
-                    </div>
-                    <div className="session-card-speaker-title">
-                      {speaker.title}
-                    </div>
-                  </div>
+                  {speaker.name}
                 </div>
               ) : null;
             })}

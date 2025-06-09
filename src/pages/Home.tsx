@@ -93,7 +93,11 @@ export default function Home() {
                 .match(/speakers:\s*\[(.*?)\]/)?.[1]
                 .split(',')
                 .map((s) =>
-                  s.trim().replace(/['"]/g, '')
+                  s
+                    .trim()
+                    .replace(/['"]/g, '')
+                    .replace(/\s+/g, '-')
+                    .toLowerCase()
                 ) || undefined,
           });
         }

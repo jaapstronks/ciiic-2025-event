@@ -65,7 +65,7 @@ const rawImages: Image[] = [
     src: '/images/100_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_2.jpeg',
     alt: 'A speaker presents on innovation, using a screen, to an attentive audience at the CIIIC Annual Meet-up event.',
     caption:
-      'A speaker presents on innovation, using a screen, to an attentive audience at the CIIIC Annual Meet-up event.',
+      'Carmen Biemond presenting on the Innovation Impact Challenge.',
   },
   {
     src: '/images/101_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_2.jpeg',
@@ -293,7 +293,7 @@ const rawImages: Image[] = [
     src: '/images/142_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_3361.jpeg',
     alt: 'Two people engaged in discussion at the CIIIC Annual Meet-up, with a vase of flowers in the background.',
     caption:
-      'Two people engaged in discussion at the CIIIC Annual Meet-up, with a vase of flowers in the background.',
+      'Michel van der Aa and Monique van Dusseldorp.',
   },
   {
     src: '/images/144_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_3419.jpeg',
@@ -322,14 +322,13 @@ const rawImages: Image[] = [
   {
     src: '/images/151_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_3531.jpeg',
     alt: 'A woman speaks into a microphone on stage at the CIIIC Annual Meet-up, with her name and title projected behind her.',
-    caption:
-      'A woman speaks into a microphone on stage at the CIIIC Annual Meet-up, with her name and title projected behind her.',
+    caption: 'Heleen Rouw',
   },
   {
     src: '/images/153_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_3557.jpeg',
     alt: 'Three individuals are engaged in a panel discussion on stage, with a projected screen behind them displaying speaker images.',
     caption:
-      'Three individuals are engaged in a panel discussion on stage, with a projected screen behind them displaying speaker images.',
+      'On stage, from left to right: Joost Raessens, Corinne Meijer, and Heleen Rouw.',
   },
   {
     src: '/images/154_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_3576.jpeg',
@@ -547,8 +546,7 @@ const rawImages: Image[] = [
   {
     src: '/images/41_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_1566.jpeg',
     alt: 'Speaker addresses audience at CIIIC Annual Meet-up, large screen showing Advisory Board group photo in background.',
-    caption:
-      'Speaker addresses audience at CIIIC Annual Meet-up, large screen showing Advisory Board group photo in background.',
+    caption: 'Heleen Rouw',
   },
   {
     src: '/images/42_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_1604.jpeg',
@@ -757,8 +755,7 @@ const rawImages: Image[] = [
   {
     src: '/images/77_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_17195.jpeg',
     alt: 'Audience seated in a bright room at the CIIIC Annual Meet-up, with a speaker presenting near a large window.',
-    caption:
-      'Audience seated in a bright room at the CIIIC Annual Meet-up, with a speaker presenting near a large window.',
+    caption: 'Audience listening to Isjah Koppejan.',
   },
   {
     src: '/images/78_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_17214.jpeg',
@@ -806,7 +803,7 @@ const rawImages: Image[] = [
     src: '/images/85_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_2237.jpeg',
     alt: 'A man in a striped shirt listens to an audience member speaking at a professional event. Other attendees are seated nearby.',
     caption:
-      'A man in a striped shirt listens to an audience member speaking at a professional event. Other attendees are seated nearby.',
+      'Moderator Servaz van Berkum letting an audience member speak.',
   },
   {
     src: '/images/86_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_2247.jpeg',
@@ -853,8 +850,7 @@ const rawImages: Image[] = [
   {
     src: '/images/95_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_17294.jpeg',
     alt: 'Audience seated facing a stage with two speakers and a presentation at a professional event.',
-    caption:
-      'Audience seated facing a stage with two speakers and a presentation at a professional event.',
+    caption: '',
   },
   {
     src: '/images/96_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_17318.jpeg',

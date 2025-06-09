@@ -2,6 +2,18 @@
   margin-bottom: 0.5rem;
 }
 
+.video-info {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.video-info p {
+  margin-top: 0;
+}
+
 .video-description {
   font-size: 0.9rem;
   margin-top: 0;

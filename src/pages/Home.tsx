@@ -11,6 +11,7 @@ interface Session {
   featuredImage: string;
   location?: string;
   sessionCode?: string;
+  speakers?: string[];
 }
 
 // Import all MDX files from the content directory
@@ -27,9 +28,13 @@ const defaultImage =
 
 // Helper function to get session order
 const getSessionOrder = (session: Session): number => {
+  // Special ordering for opening, keynote, and program overview
   if (session.id === 'opening') return 0;
+  if (session.id === 'keynote-jeremy-dalton') return 1;
+  if (session.id === 'program-overview') return 2;
   if (session.id === 'wrap-up') return 100;
 
+  // For other sessions, use the session code
   const code = session.sessionCode;
   if (!code) return 50; // Default middle position for sessions without codes
 
@@ -83,6 +88,13 @@ export default function Home() {
             sessionCode: sessionCodeMatch
               ? sessionCodeMatch[1]
               : undefined,
+            speakers:
+              content
+                .match(/speakers:\s*\[(.*?)\]/)?.[1]
+                .split(',')
+                .map((s) =>
+                  s.trim().replace(/['"]/g, '')
+                ) || undefined,
           });
         }
 
@@ -138,6 +150,16 @@ export default function Home() {
                   alt="CIIIC Annual Meet-Up 2025"
                   className="poster-image"
                 />
+                <p className="hero-credit">
+                  Photo:{' '}
+                  <a
+                    href="https://benhoudijk.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ben Houdijk
+                  </a>
+                </p>
               </div>
             </div>
 
@@ -243,6 +265,7 @@ export default function Home() {
                     featuredImage={session.featuredImage}
                     location={session.location}
                     sessionCode={session.sessionCode}
+                    speakerIds={session.speakers}
                   />
                 ))}
               </div>

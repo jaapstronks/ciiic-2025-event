@@ -30,31 +30,37 @@ export default function ImageGallery({
 
   return (
     <div className="gallery-grid">
-      {images.map((image, idx) => (
-        <a
-          key={idx}
-          href={image.src}
-          className="gallery-item"
-          data-pswp-width={image.width}
-          data-pswp-height={image.height}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src={image.src}
-            alt={image.alt}
-            width={400}
-            height={Math.round(
-              (400 * image.height) / image.width
-            )}
-            className="gallery-image"
-            loading="lazy"
-          />
-          <div className="gallery-caption">
-            {image.caption || image.alt}
-          </div>
-        </a>
-      ))}
+      {images.map((image, idx) => {
+        const displayWidth = 400;
+        const displayHeight = Math.round(
+          (displayWidth * (image.height ?? 1066)) /
+            (image.width ?? 1600)
+        );
+
+        return (
+          <a
+            key={idx}
+            href={image.src}
+            className="gallery-item"
+            data-pswp-width={image.width ?? 1600}
+            data-pswp-height={image.height ?? 1066}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              width={displayWidth}
+              height={displayHeight}
+              className="gallery-image"
+              loading="lazy"
+            />
+            <div className="gallery-caption">
+              {image.caption || image.alt}
+            </div>
+          </a>
+        );
+      })}
     </div>
   );
 }

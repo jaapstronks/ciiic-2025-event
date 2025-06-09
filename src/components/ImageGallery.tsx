@@ -2,16 +2,10 @@ import { useEffect } from 'react';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import PhotoSwipe from 'photoswipe';
 import 'photoswipe/style.css';
-
-interface ImageData {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-}
+import type { Image } from '../data/images';
 
 interface ImageGalleryProps {
-  images: ImageData[];
+  images: Image[];
 }
 
 export default function ImageGallery({
@@ -36,27 +30,37 @@ export default function ImageGallery({
 
   return (
     <div className="gallery-grid">
-      {images.map((image, idx) => (
-        <a
-          key={idx}
-          href={image.src}
-          className="gallery-item"
-          data-pswp-width={image.width}
-          data-pswp-height={image.height}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            className="gallery-image"
-            loading="lazy"
-          />
-          <div className="gallery-caption">{image.alt}</div>
-        </a>
-      ))}
+      {images.map((image, idx) => {
+        const displayWidth = 400;
+        const displayHeight = Math.round(
+          (displayWidth * (image.height ?? 1066)) /
+            (image.width ?? 1600)
+        );
+
+        return (
+          <a
+            key={idx}
+            href={image.src}
+            className="gallery-item"
+            data-pswp-width={image.width ?? 1600}
+            data-pswp-height={image.height ?? 1066}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              width={displayWidth}
+              height={displayHeight}
+              className="gallery-image"
+              loading="lazy"
+            />
+            <div className="gallery-caption">
+              {image.caption || image.alt}
+            </div>
+          </a>
+        );
+      })}
     </div>
   );
 }

@@ -388,7 +388,7 @@ li:last-child {
 }
 
 .session-detail-page .content img {
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
 }
 
 /* Hamburger menu styles */
@@ -787,7 +787,7 @@ li:last-child {
 
 /* Article illustration styles */
 .article-illustration {
-  margin: 3rem auto;
+  margin: 2rem auto;
   text-align: center;
   max-width: 800px;
 }

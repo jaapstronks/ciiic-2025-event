@@ -55,6 +55,12 @@ export const speakers: Record<string, Speaker> = {
     title: 'Moderator',
     image: '/images/speakers/Servaz-van-Berkum.jpeg',
   },
+  'pablo-cesar': {
+    name: 'Pablo Cesar',
+    title:
+      'Researcher and Group Leader CWI, Professor TU Delft',
+    image: '/images/speakers/Pablo-Cesar.jpeg',
+  },
   'isjah-koppejan': {
     name: 'Isjah Koppejan',
     title: 'NWO/Regieorgaan SIA',

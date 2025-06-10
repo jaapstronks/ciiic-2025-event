@@ -154,8 +154,7 @@ const rawImages: Image[] = [
   {
     src: '/images/115_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_17550.jpeg',
     alt: 'A person presents slides on a screen to a seated audience in a bright room during the CIIIC Annual Meet-up.',
-    caption:
-      'Joost van Dongen presenting to a seated audience.',
+    caption: 'Niki Smit presenting to a seated audience.',
   },
   {
     src: '/images/116_20250526_CIIIC_Annual-Meet-Up_Photo-Ben-Houdijk_lr_2825.jpeg',
